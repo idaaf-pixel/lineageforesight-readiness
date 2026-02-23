@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decision-Readiness Assessment</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f0; color: #1a1a1a; line-height: 1.6; min-height: 100vh;
+        }
+        .dra-container { max-width: 720px; margin: 0 auto; padding: 48px 24px; }
+        .dra-badge {
+            display: inline-block; background: #d1f0ea; color: #0d6b5e; font-size: 0.75rem;
+            font-weight: 600; padding: 4px 10px; border-radius: 100px; text-transform: uppercase;
+            letter-spacing: 0.05em; margin-bottom: 12px;
+        }
+        .dra-title { font-size: 1.75rem; font-weight: 600; margin-bottom: 8px; }
+        .dra-subtitle { color: #666; margin-bottom: 12px; font-size: 1rem; }
+        .dra-intro {
+            background: #fff; border: 1px solid #e0e0e0; border-radius: 8px;
+            padding: 16px; margin-bottom: 32px; font-size: 0.9rem; color: #555;
+        }
+        .dra-intro strong { color: #1a1a1a; }
+
+        .dra-question {
+            background: #fff; border: 1px solid #e0e0e0; border-radius: 8px;
+            padding: 24px; margin-bottom: 20px;
+        }
+        .dra-question .dra-q-num {
+            font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em;
+            color: #888; margin-bottom: 6px;
+        }
+        .dra-question .dra-scenario {
+            font-weight: 500; font-size: 1rem; margin-bottom: 20px;
+            padding-bottom: 16px; border-bottom: 1px solid #f0f0eb;
+        }
+        .dra-question label {
+            display: block; padding: 12px 14px; border: 2px solid #e0e0e0;
+            border-radius: 8px; cursor: pointer; margin-bottom: 8px;
+            transition: all 0.15s; font-size: 0.93rem;
+        }
+        .dra-question label:hover { border-color: #999; background: #fafaf5; }
+        .dra-question input[type="radio"] { display: none; }
+        .dra-question input[type="radio"]:checked + label {
+            border-color: #0d6b5e; background: #ecfdf8;
+        }
+
+        .dra-submit {
+            display: block; width: 100%; padding: 14px; background: #1a1a1a; color: #fff;
+            border: none; border-radius: 8px; font-size: 1rem; font-weight: 500;
+            cursor: pointer; margin-top: 12px; transition: background 0.15s;
+        }
+        .dra-submit:hover { background: #333; }
+        .dra-error { color: #c0392b; font-size: 0.9rem; margin-top: 12px; display: none; }
+
+        /* ── Results ── */
+        #dra-results { display: none; }
+        #dra-results .dra-results-heading { font-size: 1.5rem; font-weight: 600; margin-bottom: 8px; }
+        .dra-results-subtitle { color: #666; font-size: 0.95rem; margin-bottom: 28px; }
+
+        .dra-radar-wrap {
+            background: #fff; border: 1px solid #e0e0e0; border-radius: 12px;
+            padding: 28px; margin-bottom: 24px; text-align: center;
+        }
+        .dra-radar-wrap canvas { max-width: 100%; height: auto; }
+
+        .dra-overall-score {
+            display: flex; align-items: center; gap: 16px;
+            background: #fff; border: 1px solid #e0e0e0; border-radius: 12px;
+            padding: 24px; margin-bottom: 24px;
+        }
+        .dra-score-circle {
+            flex-shrink: 0; width: 72px; height: 72px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; font-weight: 700; color: #fff;
+        }
+        .dra-score-meta .dra-score-label {
+            font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em;
+            color: #888; margin-bottom: 2px;
+        }
+        .dra-score-meta .dra-score-name { font-size: 1.15rem; font-weight: 600; }
+
+        .dra-summary-box {
+            background: #fff; border: 1px solid #e0e0e0; border-radius: 12px;
+            padding: 24px; margin-bottom: 24px;
+        }
+        .dra-summary-box h3 {
+            font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.05em;
+            color: #888; margin-bottom: 12px;
+        }
+        .dra-summary-box p { font-size: 0.98rem; line-height: 1.7; }
+
+        .dra-dimensions { margin-bottom: 24px; }
+        .dra-dim-item {
+            background: #fff; border: 1px solid #e0e0e0; border-radius: 8px;
+            padding: 18px 20px; margin-bottom: 10px;
+        }
+        .dra-dim-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .dra-dim-name { font-weight: 600; font-size: 0.95rem; }
+        .dra-dim-level {
+            font-size: 0.75rem; font-weight: 600; padding: 3px 10px;
+            border-radius: 100px;
+        }
+        .dra-dim-bar-track {
+            height: 6px; background: #f0f0eb; border-radius: 3px; overflow: hidden;
+        }
+        .dra-dim-bar-fill {
+            height: 100%; border-radius: 3px; transition: width 0.6s ease;
+        }
+        .dra-dim-answer {
+            margin-top: 10px; font-size: 0.88rem; color: #555; font-style: italic;
+        }
+
+        .dra-level-1-bg { background: #dc2626; }
+        .dra-level-2-bg { background: #f59e0b; }
+        .dra-level-3-bg { background: #3b82f6; }
+        .dra-level-4-bg { background: #059669; }
+        .dra-level-1-text { background: #fde8e8; color: #991b1b; }
+        .dra-level-2-text { background: #fef3c7; color: #92400e; }
+        .dra-level-3-text { background: #dbeafe; color: #1e40af; }
+        .dra-level-4-text { background: #d1fae5; color: #065f46; }
+
+        .dra-restart {
+            display: block; width: 100%; padding: 14px;
+            background: transparent; color: #1a1a1a; border: 1px solid #ccc;
+            border-radius: 8px; font-size: 1rem; font-weight: 500;
+            cursor: pointer; margin-top: 8px; transition: background 0.15s;
+        }
+        .dra-restart:hover { background: #f0f0eb; }
+    </style>
+</head>
+<body>
+    <div class="dra-container">
+        <form id="dra-assessment">
+            <span class="dra-badge">Decision-Readiness</span>
+            <h1 class="dra-title">Decision-Readiness Assessment</h1>
+            <p class="dra-subtitle">How ready is your organisation to make good decisions about creative value?</p>
+            <div class="dra-intro">
+                <strong>5 scenarios, 2 minutes.</strong> You'll get a radar profile showing where your organisation's decision infrastructure is strong vs exposed — with a written interpretation that names specific tensions. Designed for museums, galleries, arts councils, creative agencies, cultural foundations, public broadcasters, and anyone making decisions about creative work. Each scenario asks how your organisation actually operates, not how it aspires to. Pick the option closest to reality.
+            </div>
+
+            <!-- Questions injected by JS to enable shuffled display order -->
+            <div id="dra-questions"></div>
+
+            <p class="dra-error" id="dra-error-msg">Please answer all 5 scenarios before submitting.</p>
+            <button type="submit" class="dra-submit">Submit responses</button>
+        </form>
+
+        <!-- ── Results ── -->
+        <div id="dra-results">
+            <h2 class="dra-results-heading">Your Decision-Readiness Profile</h2>
+            <p class="dra-results-subtitle">Based on how your organisation actually operates — not how it aspires to.</p>
+
+            <div class="dra-radar-wrap">
+                <canvas id="dra-radar" width="480" height="480"></canvas>
+            </div>
+
+            <div class="dra-overall-score" id="dra-overall-score">
+                <div class="dra-score-circle" id="dra-score-circle"></div>
+                <div class="dra-score-meta">
+                    <div class="dra-score-label">Overall Readiness</div>
+                    <div class="dra-score-name" id="dra-score-name"></div>
+                </div>
+            </div>
+
+            <div class="dra-summary-box">
+                <h3>What this pattern means</h3>
+                <p id="dra-summary-text"></p>
+            </div>
+
+            <div class="dra-dimensions" id="dra-dimensions"></div>
+
+            <button class="dra-restart" id="dra-restart-btn">Start again</button>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        // ── Data ──
+        var dims = [
+            { key: 'q1', name: 'Visibility',    fullName: 'Visibility' },
+            { key: 'q2', name: 'Measurement',   fullName: 'Measurement' },
+            { key: 'q3', name: 'Coordination',  fullName: 'Coordination' },
+            { key: 'q4', name: 'Investment',     fullName: 'Investment Readiness' },
+            { key: 'q5', name: 'Foresight',      fullName: 'Foresight Capacity' }
+        ];
+
+        var questions = [
+            {
+                key: 'q1',
+                topic: 'Visibility',
+                scenario: 'A board member asks: \u201CWhat\u2019s the creative value of what we funded last year?\u201D You need to answer within a week.',
+                options: [
+                    { value: 1, text: 'Nobody can answer that \u2014 creative value isn\u2019t tracked or discussed in those terms.' },
+                    { value: 2, text: 'A few people have opinions, but there\u2019s no shared view \u2014 it depends who you ask.' },
+                    { value: 3, text: 'We can pull together a reasonable picture, but it\u2019s patchy and takes significant effort.' },
+                    { value: 4, text: 'We have a living overview of creative value across our portfolio, accessible to and understood by leadership.' }
+                ]
+            },
+            {
+                key: 'q2',
+                topic: 'Measurement',
+                scenario: 'Two programme proposals both claim high creative value. You need to decide which one gets funded.',
+                options: [
+                    { value: 1, text: 'Creative value isn\u2019t really compared \u2014 decisions come down to relationships, precedent, or who argues loudest.' },
+                    { value: 2, text: 'People make qualitative arguments, but \u201Ccreative value\u201D means something different to everyone in the room.' },
+                    { value: 3, text: 'We have some criteria, but they\u2019re better at measuring reach and efficiency than actual creative quality.' },
+                    { value: 4, text: 'We use a framework that balances creative ambition, audience impact, and strategic fit \u2014 and people trust it.' }
+                ]
+            },
+            {
+                key: 'q3',
+                topic: 'Coordination',
+                scenario: 'A creative opportunity surfaces that spans programming, marketing, partnerships, and digital. Response needed in three weeks.',
+                options: [
+                    { value: 1, text: 'Each department handles its bit independently \u2014 no mechanism for joint creative decision-making.' },
+                    { value: 2, text: 'Someone calls a meeting, but it becomes a negotiation about territory rather than a conversation about value.' },
+                    { value: 3, text: 'Cross-functional working happens, but it depends on personal relationships, not any systematic approach.' },
+                    { value: 4, text: 'We have established ways to coordinate across teams on creative decisions \u2014 clear roles, information flows, collective judgement.' }
+                ]
+            },
+            {
+                key: 'q4',
+                topic: 'Investment Readiness',
+                scenario: 'Your evidence shows a significant creative opportunity \u2014 but acting on it would mean reallocating 15% of next year\u2019s budget. What happens?',
+                options: [
+                    { value: 1, text: 'Evidence doesn\u2019t influence budget decisions \u2014 those are political and locked in advance.' },
+                    { value: 2, text: 'The finding is noted with interest, but there\u2019s no pathway from insight to investment decision.' },
+                    { value: 3, text: 'It triggers a real conversation, but the organisation struggles to move resources across established lines.' },
+                    { value: 4, text: 'We have mechanisms to respond \u2014 ring-fenced innovation budget, reallocation triggers, or rapid business-case processes.' }
+                ]
+            },
+            {
+                key: 'q5',
+                topic: 'Foresight Capacity',
+                scenario: 'The landscape your organisation operates in is shifting \u2014 audience behaviours, technology, funding policy. How does the organisation prepare?',
+                options: [
+                    { value: 1, text: 'We react when change arrives \u2014 there\u2019s no time or habit of looking ahead.' },
+                    { value: 2, text: 'Individuals scan the horizon informally, but insights stay in their heads and rarely reach decisions.' },
+                    { value: 3, text: 'We do some horizon scanning, but it rarely connects to concrete creative or investment decisions.' },
+                    { value: 4, text: 'Foresight is built into our planning cycle \u2014 we track signals, test scenarios, and adjust creative strategy accordingly.' }
+                ]
+            }
+        ];
+
+        // Answer text lookup (keyed by question key → value)
+        var answerTexts = {};
+        questions.forEach(function(q) {
+            answerTexts[q.key] = {};
+            q.options.forEach(function(opt) {
+                answerTexts[q.key][opt.value] = opt.text;
+            });
+        });
+
+        var levelNames = { 1: 'Reactive', 2: 'Emerging', 3: 'Developing', 4: 'Mature' };
+        var levelColors = {
+            1: { bg: '#dc2626', text: '#991b1b', light: '#fde8e8' },
+            2: { bg: '#f59e0b', text: '#92400e', light: '#fef3c7' },
+            3: { bg: '#3b82f6', text: '#1e40af', light: '#dbeafe' },
+            4: { bg: '#059669', text: '#065f46', light: '#d1fae5' }
+        };
+
+        // ── Shuffle helper (Fisher-Yates) ──
+        function shuffle(arr) {
+            var a = arr.slice();
+            for (var i = a.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+            }
+            return a;
+        }
+
+        // ── Render questions with shuffled options ──
+        function renderQuestions() {
+            var container = document.getElementById('dra-questions');
+            container.innerHTML = '';
+            questions.forEach(function(q, qi) {
+                var div = document.createElement('div');
+                div.className = 'dra-question';
+
+                var numDiv = document.createElement('div');
+                numDiv.className = 'dra-q-num';
+                numDiv.textContent = 'Dimension ' + (qi + 1) + ' \u2014 ' + q.topic;
+                div.appendChild(numDiv);
+
+                var scenP = document.createElement('p');
+                scenP.className = 'dra-scenario';
+                scenP.textContent = q.scenario;
+                div.appendChild(scenP);
+
+                var shuffled = shuffle(q.options);
+                shuffled.forEach(function(opt, oi) {
+                    var id = 'dra-' + q.key + '-opt' + oi;
+                    var input = document.createElement('input');
+                    input.type = 'radio';
+                    input.name = q.key;
+                    input.id = id;
+                    input.value = opt.value;
+                    div.appendChild(input);
+
+                    var label = document.createElement('label');
+                    label.setAttribute('for', id);
+                    label.textContent = opt.text;
+                    div.appendChild(label);
+                });
+
+                container.appendChild(div);
+            });
+        }
+
+        // ── Radar Chart ──
+        function drawRadar(scores) {
+            var canvas = document.getElementById('dra-radar');
+            var ctx = canvas.getContext('2d');
+            var dpr = window.devicePixelRatio || 1;
+            var size = 480;
+            canvas.width = size * dpr;
+            canvas.height = size * dpr;
+            canvas.style.width = size + 'px';
+            canvas.style.height = size + 'px';
+            ctx.scale(dpr, dpr);
+
+            var cx = size / 2;
+            var cy = size / 2;
+            var maxR = 180;
+            var n = 5;
+            var angleStep = (2 * Math.PI) / n;
+            var startAngle = -Math.PI / 2;
+
+            function pointOnAxis(i, r) {
+                var angle = startAngle + i * angleStep;
+                return { x: cx + r * Math.cos(angle), y: cy + r * Math.sin(angle) };
+            }
+
+            // Background rings
+            for (var level = 1; level <= 4; level++) {
+                var r = (level / 4) * maxR;
+                ctx.beginPath();
+                for (var i = 0; i < n; i++) {
+                    var p = pointOnAxis(i, r);
+                    i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+                }
+                ctx.closePath();
+                ctx.strokeStyle = level === 4 ? '#ccc' : '#e8e8e3';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            // Axis lines
+            for (var i = 0; i < n; i++) {
+                var p = pointOnAxis(i, maxR);
+                ctx.beginPath();
+                ctx.moveTo(cx, cy);
+                ctx.lineTo(p.x, p.y);
+                ctx.strokeStyle = '#e0e0e0';
+                ctx.lineWidth = 1;
+                ctx.stroke();
+            }
+
+            // Level labels on first axis
+            ctx.font = '11px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.fillStyle = '#aaa';
+            ctx.textAlign = 'center';
+            for (var level = 1; level <= 4; level++) {
+                var r = (level / 4) * maxR;
+                var p = pointOnAxis(0, r);
+                ctx.fillText(level, p.x + 14, p.y + 4);
+            }
+
+            // Data polygon — teal accent
+            ctx.beginPath();
+            for (var i = 0; i < n; i++) {
+                var r = (scores[i] / 4) * maxR;
+                var p = pointOnAxis(i, r);
+                i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y);
+            }
+            ctx.closePath();
+            ctx.fillStyle = 'rgba(13, 107, 94, 0.12)';
+            ctx.fill();
+            ctx.strokeStyle = '#0d6b5e';
+            ctx.lineWidth = 2.5;
+            ctx.stroke();
+
+            // Data points
+            for (var i = 0; i < n; i++) {
+                var r = (scores[i] / 4) * maxR;
+                var p = pointOnAxis(i, r);
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 5, 0, 2 * Math.PI);
+                var lc = levelColors[scores[i]];
+                ctx.fillStyle = lc.bg;
+                ctx.fill();
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 2;
+                ctx.stroke();
+            }
+
+            // Axis labels
+            ctx.font = '600 13px -apple-system, BlinkMacSystemFont, sans-serif';
+            ctx.fillStyle = '#1a1a1a';
+            var labelOffset = 28;
+            for (var i = 0; i < n; i++) {
+                var p = pointOnAxis(i, maxR + labelOffset);
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+
+                var lx = p.x, ly = p.y;
+                if (i === 0) { ly -= 6; }
+                else if (i === 1) { lx += 10; }
+                else if (i === 2) { lx += 10; ly += 4; }
+                else if (i === 3) { lx -= 10; ly += 4; }
+                else if (i === 4) { lx -= 10; }
+
+                ctx.fillText(dims[i].name, lx, ly);
+            }
+        }
+
+        // ── Interpretive Summary ──
+        function generateSummary(scores) {
+            var avg = scores.reduce(function(a, b) { return a + b; }, 0) / scores.length;
+            var min = Math.min.apply(null, scores);
+            var max = Math.max.apply(null, scores);
+            var spread = max - min;
+
+            var weakestIdx = scores.indexOf(min);
+
+            // Named scores for cross-dimension logic
+            var visibility    = scores[0]; // Visibility
+            var measurement   = scores[1]; // Measurement
+            var coordination  = scores[2]; // Coordination
+            var investment    = scores[3]; // Investment Readiness
+            var foresight     = scores[4]; // Foresight Capacity
+
+            var parts = [];
+
+            // 1. Opening — overall maturity band
+            if (avg <= 1.5) {
+                parts.push('Your organisation is at a largely reactive stage in its decision-readiness. Decisions about creative value depend on instinct, seniority, or urgency \u2014 the infrastructure to make them well is essentially absent.');
+            } else if (avg <= 2.5) {
+                parts.push('Your organisation is at an emerging stage of decision-readiness. There\u2019s awareness that decisions about creative value need better support, but the infrastructure is patchy \u2014 some good intentions, inconsistent follow-through, and heavy reliance on individual initiative rather than shared systems.');
+            } else if (avg <= 3.5) {
+                parts.push('Your organisation has developing decision-readiness. Many of the building blocks are in place, but there are gaps between intent and practice \u2014 the right things are being attempted, not yet consistently delivered.');
+            } else {
+                parts.push('Your organisation demonstrates mature decision-readiness. The decision pipeline is systematic and self-improving \u2014 creative value is visible, measurable, coordinated across teams, resourced to act on, and informed by forward-looking intelligence.');
+            }
+
+            // 2. Shape — consistency vs unevenness
+            if (spread <= 1) {
+                parts.push('Your profile is notably consistent, which suggests your decision infrastructure has developed systemically rather than in isolated pockets.');
+            } else if (spread === 2) {
+                parts.push('Your profile shows moderate variation \u2014 some dimensions are further ahead than others, which is common. Most organisations build decision capacity unevenly.');
+            } else if (spread >= 3) {
+                parts.push('There\u2019s a striking gap between your strongest and weakest dimensions. This kind of imbalance means some parts of your decision infrastructure are well developed while others are essentially absent \u2014 which limits the effectiveness of everything else.');
+            }
+
+            // 3. Cross-dimension patterns (up to 2, checked in priority order)
+            var patterns = [];
+
+            if (visibility <= 2 && measurement >= 3) {
+                patterns.push('Your organisation can assess creative value when forced to, but it\u2019s invisible day-to-day \u2014 measurement capacity exists but has nothing continuous to work with.');
+            }
+            if (measurement >= 3 && investment <= 2) {
+                patterns.push('Measurement looks performative here \u2014 evaluation exists but doesn\u2019t change where money goes. If assessment can\u2019t influence investment, it\u2019s an exercise rather than infrastructure.');
+            }
+            if (visibility >= 3 && coordination <= 2) {
+                patterns.push('There\u2019s an insight bottleneck \u2014 understanding of creative value exists but doesn\u2019t flow across teams. The organisation can see clearly but can\u2019t act on what it sees in a joined-up way.');
+            }
+            if (coordination >= 3 && foresight <= 2) {
+                patterns.push('Your teams align well on present decisions, but nobody is steering toward what\u2019s coming \u2014 reactive consensus that risks being overtaken by shifts in the landscape.');
+            }
+            if (measurement >= 3 && coordination <= 2) {
+                patterns.push('Frameworks for assessing creative value exist on paper but can\u2019t survive cross-team reality \u2014 the evaluation tools are there, but they break down when decisions require coordination.');
+            }
+            if (foresight >= 3 && investment <= 2) {
+                patterns.push('Locked potential \u2014 your organisation can see where creative value is heading but can\u2019t move resources to meet it. Foresight without investment readiness is strategic frustration.');
+            }
+            if (visibility <= 2 && coordination >= 3) {
+                patterns.push('Your teams are flying blind together \u2014 strong collaborative habits, but coordinating around the wrong signals because creative value isn\u2019t visible enough to steer by.');
+            }
+            if (visibility <= 2 && measurement <= 2) {
+                patterns.push('There\u2019s a foundational gap \u2014 creative value can\u2019t be seen or measured, which means everything else is built on sand. Coordination, investment, and foresight all depend on this base.');
+            }
+
+            // Take up to 2 patterns
+            for (var pi = 0; pi < Math.min(2, patterns.length); pi++) {
+                parts.push(patterns[pi]);
+            }
+
+            // 4. Closing — weakest dimension as clearest opportunity
+            var weakestName = dims[weakestIdx].fullName.toLowerCase();
+            parts.push('The clearest opportunity for improvement is in ' + weakestName + ' \u2014 strengthening this dimension would have a disproportionate positive effect on the quality of decisions across the board.');
+
+            return parts.join(' ');
+        }
+
+        // ── Form Submission ──
+        var form = document.getElementById('dra-assessment');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            var fd = new FormData(form);
+            var scores = [];
+            for (var di = 0; di < dims.length; di++) {
+                var val = fd.get(dims[di].key);
+                if (!val) {
+                    document.getElementById('dra-error-msg').style.display = 'block';
+                    return;
+                }
+                scores.push(parseInt(val, 10));
+            }
+            document.getElementById('dra-error-msg').style.display = 'none';
+
+            // Draw radar
+            drawRadar(scores);
+
+            // Overall score
+            var avg = scores.reduce(function(a, b) { return a + b; }, 0) / scores.length;
+            var avgRound = Math.round(avg * 10) / 10;
+            var overallLevel = avg <= 1.5 ? 1 : avg <= 2.5 ? 2 : avg <= 3.5 ? 3 : 4;
+            var lc = levelColors[overallLevel];
+            var scoreCircle = document.getElementById('dra-score-circle');
+            scoreCircle.textContent = avgRound;
+            scoreCircle.style.background = lc.bg;
+            document.getElementById('dra-score-name').textContent = levelNames[overallLevel] + ' \u2014 ' + avgRound + ' / 4';
+
+            // Summary
+            document.getElementById('dra-summary-text').textContent = generateSummary(scores);
+
+            // Dimension breakdown
+            var dimsEl = document.getElementById('dra-dimensions');
+            dimsEl.innerHTML = '';
+            dims.forEach(function(dim, i) {
+                var score = scores[i];
+                var lc = levelColors[score];
+                var pct = (score / 4) * 100;
+                var div = document.createElement('div');
+                div.className = 'dra-dim-item';
+                div.innerHTML =
+                    '<div class="dra-dim-header">' +
+                        '<span class="dra-dim-name">' + dim.fullName + '</span>' +
+                        '<span class="dra-dim-level" style="background:' + lc.light + ';color:' + lc.text + '">' + levelNames[score] + ' (' + score + '/4)</span>' +
+                    '</div>' +
+                    '<div class="dra-dim-bar-track">' +
+                        '<div class="dra-dim-bar-fill" style="width:' + pct + '%;background:' + lc.bg + '"></div>' +
+                    '</div>' +
+                    '<div class="dra-dim-answer">\u201C' + answerTexts[dim.key][score] + '\u201D</div>';
+                dimsEl.appendChild(div);
+            });
+
+            // Show results
+            form.style.display = 'none';
+            document.getElementById('dra-results').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ── Reset ──
+        document.getElementById('dra-restart-btn').addEventListener('click', function() {
+            form.reset();
+            form.style.display = 'block';
+            document.getElementById('dra-results').style.display = 'none';
+            renderQuestions(); // re-shuffle options
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // ── Init ──
+        renderQuestions();
+    })();
+    </script>
+</body>
+</html>
