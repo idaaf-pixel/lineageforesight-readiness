@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Version A — Likert Scale | Creative Value Assessment</title>
+    <title>Version A — Likert Scale | Decision-Readiness Assessment</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -92,16 +92,16 @@
 
         <form id="assessment">
             <span class="badge">Version A</span>
-            <h1>Creative Value Assessment</h1>
+            <h1>Decision-Readiness Assessment</h1>
             <p class="subtitle">Likert Scale Format</p>
             <div class="format-note">
                 <strong>How this works:</strong> Rate your agreement with each statement on a 5-point scale,
-                from "Strongly Disagree" to "Strongly Agree."
+                from "Strongly Disagree" to "Strongly Agree." Answer based on how your institution actually operates today.
             </div>
 
             <div class="question">
-                <div class="q-num">Topic 1 — Evaluation Priorities</div>
-                <p class="statement">"Our organisation has a clear, shared understanding of what makes a creative idea worth pursuing."</p>
+                <div class="q-num">Topic 1 — Visibility</div>
+                <p class="statement">"Our institution has a clear, current picture of the capabilities, gaps, and emerging work across the creative ecosystem we support."</p>
                 <div class="likert-scale">
                     <div class="likert-option">
                         <input type="radio" name="q1" id="q1a" value="1">
@@ -127,8 +127,8 @@
             </div>
 
             <div class="question">
-                <div class="q-num">Topic 2 — Decision-Making Authority</div>
-                <p class="statement">"It is always clear who has the authority to approve or reject creative work in our organisation."</p>
+                <div class="q-num">Topic 2 — Coordination</div>
+                <p class="statement">"When decisions affect multiple partners, sectors, or governance layers, our institution coordinates effectively rather than acting in isolation."</p>
                 <div class="likert-scale">
                     <div class="likert-option">
                         <input type="radio" name="q2" id="q2a" value="1">
@@ -154,8 +154,8 @@
             </div>
 
             <div class="question">
-                <div class="q-num">Topic 3 — Measuring Success</div>
-                <p class="statement">"We have robust methods for evaluating whether our creative output actually achieved its goals."</p>
+                <div class="q-num">Topic 3 — Measurement</div>
+                <p class="statement">"We have credible methods for assessing whether our creative economy investments and programmes are delivering value."</p>
                 <div class="likert-scale">
                     <div class="likert-option">
                         <input type="radio" name="q3" id="q3a" value="1">
@@ -181,8 +181,8 @@
             </div>
 
             <div class="question">
-                <div class="q-num">Topic 4 — Handling Rejection</div>
-                <p class="statement">"When creative ideas are turned down here, the reasons given are constructive and consistent."</p>
+                <div class="q-num">Topic 4 — Investment Readiness</div>
+                <p class="statement">"Our institution is structured to identify, evaluate, and commit to creative economy opportunities — and when proposals are declined, the reasoning is clear and constructive."</p>
                 <div class="likert-scale">
                     <div class="likert-option">
                         <input type="radio" name="q4" id="q4a" value="1">
@@ -208,8 +208,8 @@
             </div>
 
             <div class="question">
-                <div class="q-num">Topic 5 — Creative Risk Appetite</div>
-                <p class="statement">"Our organisation actively encourages creative experimentation, even when the outcome is uncertain."</p>
+                <div class="q-num">Topic 5 — Foresight Capacity</div>
+                <p class="statement">"Our institution can anticipate shifts in the creative economy and adjust programmes and priorities ahead of time, rather than reacting after the fact."</p>
                 <div class="likert-scale">
                     <div class="likert-option">
                         <input type="radio" name="q5" id="q5a" value="1">
@@ -247,19 +247,19 @@
 
     <script>
         const statements = {
-            q1: "Our organisation has a clear, shared understanding of what makes a creative idea worth pursuing.",
-            q2: "It is always clear who has the authority to approve or reject creative work in our organisation.",
-            q3: "We have robust methods for evaluating whether our creative output actually achieved its goals.",
-            q4: "When creative ideas are turned down here, the reasons given are constructive and consistent.",
-            q5: "Our organisation actively encourages creative experimentation, even when the outcome is uncertain."
+            q1: "Our institution has a clear, current picture of the capabilities, gaps, and emerging work across the creative ecosystem we support.",
+            q2: "When decisions affect multiple partners, sectors, or governance layers, our institution coordinates effectively rather than acting in isolation.",
+            q3: "We have credible methods for assessing whether our creative economy investments and programmes are delivering value.",
+            q4: "Our institution is structured to identify, evaluate, and commit to creative economy opportunities — and when proposals are declined, the reasoning is clear and constructive.",
+            q5: "Our institution can anticipate shifts in the creative economy and adjust programmes and priorities ahead of time, rather than reacting after the fact."
         };
 
         const topics = {
-            q1: "Evaluation Priorities",
-            q2: "Decision-Making Authority",
-            q3: "Measuring Success",
-            q4: "Handling Rejection",
-            q5: "Creative Risk Appetite"
+            q1: "Visibility",
+            q2: "Coordination",
+            q3: "Measurement",
+            q4: "Investment Readiness",
+            q5: "Foresight Capacity"
         };
 
         const labels = { "1": "Strongly Disagree", "2": "Disagree", "3": "Neutral", "4": "Agree", "5": "Strongly Agree" };

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Version C — Binary + Branching | Creative Value Assessment</title>
+    <title>Version C — Binary + Branching | Decision-Readiness Assessment</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
@@ -111,17 +111,17 @@
 
         <form id="assessment">
             <span class="badge">Version C</span>
-            <h1>Creative Value Assessment</h1>
+            <h1>Decision-Readiness Assessment</h1>
             <p class="subtitle">Binary + Branching Format</p>
             <div class="format-note">
                 <strong>How this works:</strong> Answer each Yes/No question honestly.
-                A follow-up question will appear based on your answer to dig deeper into your organisation's reality.
+                A follow-up question will appear based on your answer to dig deeper into your institution's reality.
             </div>
 
-            <!-- Q1: Evaluation Priorities -->
+            <!-- Q1: Visibility -->
             <div class="question" id="block-q1">
-                <div class="q-num">Topic 1 — Evaluation Priorities</div>
-                <p class="primary-q">Does your organisation have explicit criteria for evaluating creative ideas?</p>
+                <div class="q-num">Topic 1 — Visibility</div>
+                <p class="primary-q">Does your institution have a current, consolidated view of the creative ecosystem it supports?</p>
                 <div class="yn-group">
                     <input type="radio" name="q1" id="q1-yes" value="yes">
                     <label for="q1-yes" class="yes-label">Yes</label>
@@ -130,30 +130,30 @@
                 </div>
                 <div class="followup" id="q1-followup-yes">
                     <div class="followup-label">Follow-up</div>
-                    <p class="followup-q">How consistently are those criteria actually applied?</p>
+                    <p class="followup-q">How reliably does that view inform your decisions?</p>
                     <input type="radio" name="q1f" id="q1f-a" value="a">
-                    <label for="q1f-a">Consistently — everyone knows and uses them</label>
+                    <label for="q1f-a">Reliably — it's actively used in programme design and funding decisions</label>
                     <input type="radio" name="q1f" id="q1f-b" value="b">
-                    <label for="q1f-b">Inconsistently — they exist on paper but get bypassed</label>
+                    <label for="q1f-b">Partially — the data exists but isn't consistently used when it matters</label>
                     <input type="radio" name="q1f" id="q1f-c" value="c">
-                    <label for="q1f-c">Only in certain teams or for certain projects</label>
+                    <label for="q1f-c">Rarely — the view is outdated or only covers certain programmes</label>
                 </div>
                 <div class="followup" id="q1-followup-no">
                     <div class="followup-label">Follow-up</div>
-                    <p class="followup-q">What tends to drive the decision instead?</p>
+                    <p class="followup-q">What do you rely on instead?</p>
                     <input type="radio" name="q1f" id="q1f-d" value="d">
-                    <label for="q1f-d">Seniority — the most powerful voice wins</label>
+                    <label for="q1f-d">Individual knowledge — specific people hold the picture in their heads</label>
                     <input type="radio" name="q1f" id="q1f-e" value="e">
-                    <label for="q1f-e">Instinct — people go with what "feels right"</label>
+                    <label for="q1f-e">Grant reports — we piece things together from what applicants tell us</label>
                     <input type="radio" name="q1f" id="q1f-f" value="f">
-                    <label for="q1f-f">Inertia — we default to what we've always done</label>
+                    <label for="q1f-f">Assumptions — we work from a general sense of the landscape, not evidence</label>
                 </div>
             </div>
 
-            <!-- Q2: Decision-Making Authority -->
+            <!-- Q2: Coordination -->
             <div class="question" id="block-q2">
-                <div class="q-num">Topic 2 — Decision-Making Authority</div>
-                <p class="primary-q">Is there a clearly designated person or group who makes final creative decisions?</p>
+                <div class="q-num">Topic 2 — Coordination</div>
+                <p class="primary-q">Does your institution have established processes for coordinating with partners across sectors and governance layers?</p>
                 <div class="yn-group">
                     <input type="radio" name="q2" id="q2-yes" value="yes">
                     <label for="q2-yes" class="yes-label">Yes</label>
@@ -162,30 +162,30 @@
                 </div>
                 <div class="followup" id="q2-followup-yes">
                     <div class="followup-label">Follow-up</div>
-                    <p class="followup-q">Does the creative team feel that decision-maker understands creative value?</p>
+                    <p class="followup-q">Do those processes lead to clear, shared decisions?</p>
                     <input type="radio" name="q2f" id="q2f-a" value="a">
-                    <label for="q2f-a">Yes — they have creative literacy and the team trusts their judgement</label>
+                    <label for="q2f-a">Yes — roles are clear and decisions are made jointly with accountability</label>
                     <input type="radio" name="q2f" id="q2f-b" value="b">
-                    <label for="q2f-b">Partially — they mean well but default to commercial or political reasoning</label>
+                    <label for="q2f-b">Partially — we coordinate well but decisions still default to the loudest voice</label>
                     <input type="radio" name="q2f" id="q2f-c" value="c">
-                    <label for="q2f-c">No — decisions feel disconnected from creative intent</label>
+                    <label for="q2f-c">Not really — coordination is procedural but rarely changes how decisions are made</label>
                 </div>
                 <div class="followup" id="q2-followup-no">
                     <div class="followup-label">Follow-up</div>
-                    <p class="followup-q">What usually happens when there's no clear decision-maker?</p>
+                    <p class="followup-q">What happens when cross-sector coordination is needed?</p>
                     <input type="radio" name="q2f" id="q2f-d" value="d">
-                    <label for="q2f-d">Projects stall or get stuck in rounds of feedback</label>
+                    <label for="q2f-d">Initiatives stall — mandates and timelines don't align</label>
                     <input type="radio" name="q2f" id="q2f-e" value="e">
-                    <label for="q2f-e">Someone eventually just makes a call, but it feels arbitrary</label>
+                    <label for="q2f-e">It depends on personal relationships rather than institutional processes</label>
                     <input type="radio" name="q2f" id="q2f-f" value="f">
-                    <label for="q2f-f">The work gets diluted by committee until it's safe but uninspired</label>
+                    <label for="q2f-f">Each body acts in isolation — there's no mechanism for joint decision-making</label>
                 </div>
             </div>
 
-            <!-- Q3: Measuring Success -->
+            <!-- Q3: Measurement -->
             <div class="question" id="block-q3">
-                <div class="q-num">Topic 3 — Measuring Success</div>
-                <p class="primary-q">Does your organisation formally review the success of creative projects after they launch?</p>
+                <div class="q-num">Topic 3 — Measurement</div>
+                <p class="primary-q">Does your institution formally assess whether its creative economy programmes and investments deliver value?</p>
                 <div class="yn-group">
                     <input type="radio" name="q3" id="q3-yes" value="yes">
                     <label for="q3-yes" class="yes-label">Yes</label>
@@ -194,30 +194,30 @@
                 </div>
                 <div class="followup" id="q3-followup-yes">
                     <div class="followup-label">Follow-up</div>
-                    <p class="followup-q">Do those reviews capture creative quality, or just performance metrics?</p>
+                    <p class="followup-q">Do those assessments capture outcomes and learning, or just activity?</p>
                     <input type="radio" name="q3f" id="q3f-a" value="a">
-                    <label for="q3f-a">Both — we assess creative ambition alongside results</label>
+                    <label for="q3f-a">Both — we combine quantitative outcomes with qualitative evidence and feed learnings back into future investment</label>
                     <input type="radio" name="q3f" id="q3f-b" value="b">
-                    <label for="q3f-b">Mostly metrics — clicks, reach, conversions</label>
+                    <label for="q3f-b">Mostly activity — organisations reached, events held, funds disbursed</label>
                     <input type="radio" name="q3f" id="q3f-c" value="c">
-                    <label for="q3f-c">It varies — no consistent framework for what "good" looks like</label>
+                    <label for="q3f-c">It varies — no consistent framework for what "value" means across programmes</label>
                 </div>
                 <div class="followup" id="q3-followup-no">
                     <div class="followup-label">Follow-up</div>
                     <p class="followup-q">Why not?</p>
                     <input type="radio" name="q3f" id="q3f-d" value="d">
-                    <label for="q3f-d">We're too busy — we move straight to the next project</label>
+                    <label for="q3f-d">We move to the next funding cycle — there's no time built in for review</label>
                     <input type="radio" name="q3f" id="q3f-e" value="e">
-                    <label for="q3f-e">No one owns it — there's no process for post-launch review</label>
+                    <label for="q3f-e">No one owns it — programme teams report activity, but impact assessment falls through the cracks</label>
                     <input type="radio" name="q3f" id="q3f-f" value="f">
-                    <label for="q3f-f">We wouldn't know what to measure beyond basic numbers</label>
+                    <label for="q3f-f">We wouldn't know what to measure — creative economy value is hard to define</label>
                 </div>
             </div>
 
-            <!-- Q4: Handling Rejection -->
+            <!-- Q4: Investment Readiness -->
             <div class="question" id="block-q4">
-                <div class="q-num">Topic 4 — Handling Rejection</div>
-                <p class="primary-q">When a creative idea is rejected, is the reasoning clearly communicated to the person who proposed it?</p>
+                <div class="q-num">Topic 4 — Investment Readiness</div>
+                <p class="primary-q">When a creative economy proposal is declined, is the reasoning clearly communicated to the applicant?</p>
                 <div class="yn-group">
                     <input type="radio" name="q4" id="q4-yes" value="yes">
                     <label for="q4-yes" class="yes-label">Yes</label>
@@ -226,30 +226,30 @@
                 </div>
                 <div class="followup" id="q4-followup-yes">
                     <div class="followup-label">Follow-up</div>
-                    <p class="followup-q">Does that feedback help the creator improve their next pitch?</p>
+                    <p class="followup-q">Does that feedback help applicants strengthen future proposals?</p>
                     <input type="radio" name="q4f" id="q4f-a" value="a">
-                    <label for="q4f-a">Yes — rejections are developmental, not just a verdict</label>
+                    <label for="q4f-a">Yes — declined proposals receive specific guidance, and we track patterns in what gets funded</label>
                     <input type="radio" name="q4f" id="q4f-b" value="b">
-                    <label for="q4f-b">Sometimes — it depends on who gives the feedback</label>
+                    <label for="q4f-b">Sometimes — it depends on the programme officer or panel involved</label>
                     <input type="radio" name="q4f" id="q4f-c" value="c">
-                    <label for="q4f-c">Not really — the feedback is vague ("not quite right", "not now")</label>
+                    <label for="q4f-c">Not really — feedback is generic ("did not meet criteria") without actionable detail</label>
                 </div>
                 <div class="followup" id="q4-followup-no">
                     <div class="followup-label">Follow-up</div>
-                    <p class="followup-q">What effect does that have on the creative team?</p>
+                    <p class="followup-q">What effect does that have on the organisations you support?</p>
                     <input type="radio" name="q4f" id="q4f-d" value="d">
-                    <label for="q4f-d">People become cautious — they only pitch "safe" ideas</label>
+                    <label for="q4f-d">They become cautious — only submitting safe, formulaic proposals</label>
                     <input type="radio" name="q4f" id="q4f-e" value="e">
-                    <label for="q4f-e">Resentment builds — the process feels opaque and unfair</label>
+                    <label for="q4f-e">Frustration builds — the process is seen as opaque and inconsistent</label>
                     <input type="radio" name="q4f" id="q4f-f" value="f">
-                    <label for="q4f-f">Disengagement — talented creatives stop trying or leave</label>
+                    <label for="q4f-f">Disengagement — strong organisations stop applying and look elsewhere for support</label>
                 </div>
             </div>
 
-            <!-- Q5: Risk Appetite -->
+            <!-- Q5: Foresight Capacity -->
             <div class="question" id="block-q5">
-                <div class="q-num">Topic 5 — Creative Risk Appetite</div>
-                <p class="primary-q">Has your organisation taken a genuine creative risk in the last 12 months?</p>
+                <div class="q-num">Topic 5 — Foresight Capacity</div>
+                <p class="primary-q">Has your institution adjusted a programme or investment priority in the last 12 months based on an anticipated shift in the creative economy?</p>
                 <div class="yn-group">
                     <input type="radio" name="q5" id="q5-yes" value="yes">
                     <label for="q5-yes" class="yes-label">Yes</label>
@@ -258,23 +258,23 @@
                 </div>
                 <div class="followup" id="q5-followup-yes">
                     <div class="followup-label">Follow-up</div>
-                    <p class="followup-q">How did the organisation respond to the outcome?</p>
+                    <p class="followup-q">How did the institution respond to the outcome of that adjustment?</p>
                     <input type="radio" name="q5f" id="q5f-a" value="a">
-                    <label for="q5f-a">Positively — even imperfect results were treated as learning</label>
+                    <label for="q5f-a">Positively — even imperfect results were treated as useful learning for the institution</label>
                     <input type="radio" name="q5f" id="q5f-b" value="b">
-                    <label for="q5f-b">Mixed — it was celebrated if it worked, but blamed if it didn't</label>
+                    <label for="q5f-b">Mixed — it was supported if it worked, but questioned if it didn't</label>
                     <input type="radio" name="q5f" id="q5f-c" value="c">
-                    <label for="q5f-c">It reinforced caution — "see, that's why we don't do that"</label>
+                    <label for="q5f-c">It reinforced caution — leadership became less willing to act on early signals</label>
                 </div>
                 <div class="followup" id="q5-followup-no">
                     <div class="followup-label">Follow-up</div>
-                    <p class="followup-q">What's the main barrier to creative risk-taking?</p>
+                    <p class="followup-q">What's the main barrier to acting on emerging shifts?</p>
                     <input type="radio" name="q5f" id="q5f-d" value="d">
-                    <label for="q5f-d">Fear of failure at leadership level</label>
+                    <label for="q5f-d">Risk aversion — leadership prefers to wait for clear evidence before acting</label>
                     <input type="radio" name="q5f" id="q5f-e" value="e">
-                    <label for="q5f-e">No budget or time allocated for experimentation</label>
+                    <label for="q5f-e">No capacity — there's no dedicated resource or process for horizon-scanning</label>
                     <input type="radio" name="q5f" id="q5f-f" value="f">
-                    <label for="q5f-f">Cultural — the organisation rewards consistency over originality</label>
+                    <label for="q5f-f">Institutional inertia — programme cycles are fixed and hard to redirect</label>
                 </div>
             </div>
 
@@ -292,111 +292,111 @@
     <script>
         const qData = {
             q1: {
-                topic: "Evaluation Priorities",
-                primary: "Does your organisation have explicit criteria for evaluating creative ideas?",
+                topic: "Visibility",
+                primary: "Does your institution have a current, consolidated view of the creative ecosystem it supports?",
                 followups: {
                     yes: {
-                        question: "How consistently are those criteria actually applied?",
+                        question: "How reliably does that view inform your decisions?",
                         answers: {
-                            a: "Consistently — everyone knows and uses them",
-                            b: "Inconsistently — they exist on paper but get bypassed",
-                            c: "Only in certain teams or for certain projects"
+                            a: "Reliably — it's actively used in programme design and funding decisions",
+                            b: "Partially — the data exists but isn't consistently used when it matters",
+                            c: "Rarely — the view is outdated or only covers certain programmes"
                         }
                     },
                     no: {
-                        question: "What tends to drive the decision instead?",
+                        question: "What do you rely on instead?",
                         answers: {
-                            d: "Seniority — the most powerful voice wins",
-                            e: "Instinct — people go with what \"feels right\"",
-                            f: "Inertia — we default to what we've always done"
+                            d: "Individual knowledge — specific people hold the picture in their heads",
+                            e: "Grant reports — we piece things together from what applicants tell us",
+                            f: "Assumptions — we work from a general sense of the landscape, not evidence"
                         }
                     }
                 }
             },
             q2: {
-                topic: "Decision-Making Authority",
-                primary: "Is there a clearly designated person or group who makes final creative decisions?",
+                topic: "Coordination",
+                primary: "Does your institution have established processes for coordinating with partners across sectors and governance layers?",
                 followups: {
                     yes: {
-                        question: "Does the creative team feel that decision-maker understands creative value?",
+                        question: "Do those processes lead to clear, shared decisions?",
                         answers: {
-                            a: "Yes — they have creative literacy and the team trusts their judgement",
-                            b: "Partially — they default to commercial or political reasoning",
-                            c: "No — decisions feel disconnected from creative intent"
+                            a: "Yes — roles are clear and decisions are made jointly with accountability",
+                            b: "Partially — we coordinate well but decisions still default to the loudest voice",
+                            c: "Not really — coordination is procedural but rarely changes how decisions are made"
                         }
                     },
                     no: {
-                        question: "What usually happens when there's no clear decision-maker?",
+                        question: "What happens when cross-sector coordination is needed?",
                         answers: {
-                            d: "Projects stall or get stuck in rounds of feedback",
-                            e: "Someone eventually just makes a call, but it feels arbitrary",
-                            f: "The work gets diluted by committee until it's safe but uninspired"
+                            d: "Initiatives stall — mandates and timelines don't align",
+                            e: "It depends on personal relationships rather than institutional processes",
+                            f: "Each body acts in isolation — there's no mechanism for joint decision-making"
                         }
                     }
                 }
             },
             q3: {
-                topic: "Measuring Success",
-                primary: "Does your organisation formally review the success of creative projects after they launch?",
+                topic: "Measurement",
+                primary: "Does your institution formally assess whether its creative economy programmes and investments deliver value?",
                 followups: {
                     yes: {
-                        question: "Do those reviews capture creative quality, or just performance metrics?",
+                        question: "Do those assessments capture outcomes and learning, or just activity?",
                         answers: {
-                            a: "Both — we assess creative ambition alongside results",
-                            b: "Mostly metrics — clicks, reach, conversions",
-                            c: "It varies — no consistent framework"
+                            a: "Both — we combine quantitative outcomes with qualitative evidence and feed learnings back into future investment",
+                            b: "Mostly activity — organisations reached, events held, funds disbursed",
+                            c: "It varies — no consistent framework for what \"value\" means across programmes"
                         }
                     },
                     no: {
                         question: "Why not?",
                         answers: {
-                            d: "We're too busy — we move straight to the next project",
-                            e: "No one owns it — there's no process for post-launch review",
-                            f: "We wouldn't know what to measure beyond basic numbers"
+                            d: "We move to the next funding cycle — there's no time built in for review",
+                            e: "No one owns it — programme teams report activity, but impact assessment falls through the cracks",
+                            f: "We wouldn't know what to measure — creative economy value is hard to define"
                         }
                     }
                 }
             },
             q4: {
-                topic: "Handling Rejection",
-                primary: "When a creative idea is rejected, is the reasoning clearly communicated?",
+                topic: "Investment Readiness",
+                primary: "When a creative economy proposal is declined, is the reasoning clearly communicated to the applicant?",
                 followups: {
                     yes: {
-                        question: "Does that feedback help the creator improve their next pitch?",
+                        question: "Does that feedback help applicants strengthen future proposals?",
                         answers: {
-                            a: "Yes — rejections are developmental, not just a verdict",
-                            b: "Sometimes — it depends on who gives the feedback",
-                            c: "Not really — the feedback is vague"
+                            a: "Yes — declined proposals receive specific guidance, and we track patterns in what gets funded",
+                            b: "Sometimes — it depends on the programme officer or panel involved",
+                            c: "Not really — feedback is generic (\"did not meet criteria\") without actionable detail"
                         }
                     },
                     no: {
-                        question: "What effect does that have on the creative team?",
+                        question: "What effect does that have on the organisations you support?",
                         answers: {
-                            d: "People become cautious — they only pitch \"safe\" ideas",
-                            e: "Resentment builds — the process feels opaque and unfair",
-                            f: "Disengagement — talented creatives stop trying or leave"
+                            d: "They become cautious — only submitting safe, formulaic proposals",
+                            e: "Frustration builds — the process is seen as opaque and inconsistent",
+                            f: "Disengagement — strong organisations stop applying and look elsewhere for support"
                         }
                     }
                 }
             },
             q5: {
-                topic: "Creative Risk Appetite",
-                primary: "Has your organisation taken a genuine creative risk in the last 12 months?",
+                topic: "Foresight Capacity",
+                primary: "Has your institution adjusted a programme or investment priority in the last 12 months based on an anticipated shift in the creative economy?",
                 followups: {
                     yes: {
-                        question: "How did the organisation respond to the outcome?",
+                        question: "How did the institution respond to the outcome of that adjustment?",
                         answers: {
-                            a: "Positively — even imperfect results were treated as learning",
-                            b: "Mixed — celebrated if it worked, blamed if it didn't",
-                            c: "It reinforced caution — \"see, that's why we don't do that\""
+                            a: "Positively — even imperfect results were treated as useful learning for the institution",
+                            b: "Mixed — it was supported if it worked, but questioned if it didn't",
+                            c: "It reinforced caution — leadership became less willing to act on early signals"
                         }
                     },
                     no: {
-                        question: "What's the main barrier to creative risk-taking?",
+                        question: "What's the main barrier to acting on emerging shifts?",
                         answers: {
-                            d: "Fear of failure at leadership level",
-                            e: "No budget or time allocated for experimentation",
-                            f: "Cultural — the organisation rewards consistency over originality"
+                            d: "Risk aversion — leadership prefers to wait for clear evidence before acting",
+                            e: "No capacity — there's no dedicated resource or process for horizon-scanning",
+                            f: "Institutional inertia — programme cycles are fixed and hard to redirect"
                         }
                     }
                 }
