@@ -1,20 +1,18 @@
-# lineageforesight-web
-Lineage Foresight website — lineageforesight.eu
-# Lineage Foresight — Website
+# lineageforesight-readiness
 
-Public website for Lineage Foresight, hosted at [lineageforesight.eu](https://lineageforesight.eu).
+Decision Readiness Assessment for Lineage Foresight.
 
 ## Stack
-Static HTML/CSS — hosted via GitHub Pages.
+Static HTML — hosted via Vercel.
 
 ## Structure
-- `index.html` — main landing page
-- `assets/` — fonts, images, icons
-- `css/` — stylesheets
+- `index.html` — entry point
+- `assessment.html` — the assessment form
+- `decision-readiness.html` — results page
 
 ## Branches
 - `main` — production (what's live)
 - `dev` — working branch (never commit directly to main)
 
 ## Deployment
-Pushes to `main` automatically deploy via GitHub Pages.
+Connected to Vercel. Pushes to `main` auto-deploy.
